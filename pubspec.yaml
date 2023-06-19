@@ -65,6 +65,13 @@ flutter:
   assets:
      - assets/images/images_bg.jpg
      - assets/images/main_bg.jpg
+     - assets/svg_image.svg
+     - assets/svg_main.svg
+     - assets/svg_image_bg.svg
+     - assets/no_messages_adobe_express.svg
+     - assets/no_message.svg
+     - assets/india.svg
+     - assets/leaderboard_image.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

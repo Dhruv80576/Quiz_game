@@ -3,27 +3,47 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 
 int _index_ques_add = 0;
+List<String> choices_ques_add = ["", "", "", ""];
+String ques = "";
 
 class Ques_add extends StatefulWidget {
   Ques_add(int _index) {
     _index_ques_add = _index;
+    choices_ques_add[0] =
+        ques_dtl_lst.elementAt(_index_ques_add).choices_model[0];
+    choices_ques_add[1] =
+        ques_dtl_lst.elementAt(_index_ques_add).choices_model[1];
+    choices_ques_add[2] =
+        ques_dtl_lst.elementAt(_index_ques_add).choices_model[2];
+    choices_ques_add[3] =
+        ques_dtl_lst.elementAt(_index_ques_add).choices_model[3];
+    ques = ques_dtl_lst.elementAt(_index_ques_add).question;
   }
-
   @override
   State<Ques_add> createState() => _Ques_addState();
 }
 
 class _Ques_addState extends State<Ques_add> {
   int answr_index = 0;
-  String ques = "";
   String level = "";
-  List<String> choices_ques_add = ["", "", "", ""];
   List<String> choices = [];
   int? current_radio;
   String? current_level;
-  Color color_lvl=Colors.white;
+  Color color_lvl = Colors.white;
+  String txt_ques = ques_dtl_lst.elementAt(0).question;
+
   @override
   Widget build(BuildContext context) {
+    TextEditingController textEditingController_ques =
+        TextEditingController(text: (ques));
+    TextEditingController textEditingController_choice1 =
+        TextEditingController(text: (choices_ques_add[0]));
+    TextEditingController textEditingController_choice2 =
+        TextEditingController(text: (choices_ques_add[1]));
+    TextEditingController textEditingController_choice3 =
+        TextEditingController(text: (choices_ques_add[2]));
+    TextEditingController textEditingController_choice4 =
+        TextEditingController(text: (choices_ques_add[3]));
     int? current_active;
     return WillPopScope(
       onWillPop: () async => false,
@@ -80,6 +100,7 @@ class _Ques_addState extends State<Ques_add> {
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                           child: TextField(
+                            controller: textEditingController_ques,
                             enabled: true,
                             cursorColor: Color(0xFF191D63),
                             style: TextStyle(
@@ -117,6 +138,7 @@ class _Ques_addState extends State<Ques_add> {
                         Container(
                           child: Column(children: [
                             TextField(
+                              controller: textEditingController_choice1,
                               onChanged: (String text) {
                                 choices_ques_add[0] = text;
                               },
@@ -137,6 +159,7 @@ class _Ques_addState extends State<Ques_add> {
                               height: 15,
                             ),
                             TextField(
+                              controller: textEditingController_choice2,
                               onChanged: (String text) {
                                 choices_ques_add[1] = text;
                               },
@@ -157,6 +180,7 @@ class _Ques_addState extends State<Ques_add> {
                               height: 15,
                             ),
                             TextField(
+                              controller: textEditingController_choice3,
                               onChanged: (String text) {
                                 choices_ques_add[2] = text;
                               },
@@ -177,6 +201,7 @@ class _Ques_addState extends State<Ques_add> {
                               height: 15,
                             ),
                             TextField(
+                              controller: textEditingController_choice4,
                               onChanged: (String text) {
                                 choices_ques_add[3] = text;
                               },
@@ -278,7 +303,7 @@ class _Ques_addState extends State<Ques_add> {
                             onChanged: (value) {
                               setState(() {
                                 current_level = value;
-                                level=current_level!;
+                                level = current_level!;
                               });
                             },
                             title: Text("Hard"),
@@ -297,8 +322,7 @@ class _Ques_addState extends State<Ques_add> {
                             onChanged: (value) {
                               setState(() {
                                 current_level = value;
-                                level=current_level!;
-
+                                level = current_level!;
                               });
                             },
                             title: Text("Medium"),
@@ -317,7 +341,7 @@ class _Ques_addState extends State<Ques_add> {
                             onChanged: (value) {
                               setState(() {
                                 current_level = value;
-                                level=current_level!;
+                                level = current_level!;
                               });
                             },
                             title: Text("Easy"),
@@ -334,7 +358,11 @@ class _Ques_addState extends State<Ques_add> {
                           onPressed: () {
                             checkcolor();
                             ques_dtl_lst[_index_ques_add] = Question_model(
-                                ques, choices_ques_add,level,current_radio!,color_lvl);
+                                ques,
+                                choices_ques_add,
+                                level,
+                                current_radio!,
+                                color_lvl);
                             Navigator.pushAndRemoveUntil(context,
                                 MaterialPageRoute(
                                     builder: (BuildContext context) {
@@ -361,14 +389,12 @@ class _Ques_addState extends State<Ques_add> {
   }
 
   void checkcolor() {
-    if(level=="Easy"){
-      color_lvl=Colors.green.shade200;
-    }
-    else if(level=="Hard"){
-      color_lvl=Colors.red.shade200;
-    }
-    else if(level=="Medium"){
-      color_lvl=Colors.blue.shade200;
+    if (level == "Easy") {
+      color_lvl = Colors.green.shade200;
+    } else if (level == "Hard") {
+      color_lvl = Colors.red.shade200;
+    } else if (level == "Medium") {
+      color_lvl = Colors.blue.shade200;
     }
   }
 }

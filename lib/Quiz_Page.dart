@@ -124,20 +124,19 @@ class _Quiz_PageState extends State<Quiz_Page> {
               ),
               Container(
                 alignment: Alignment.center,
-
                 margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
                 child: LinearProgressIndicator(
                   minHeight: 20,
                   backgroundColor: Color(0xFFF4F3F6),
                   color: Color(0xFF376996),
-                  value:((ques_nmbr+1)/5),
+                  value:((ques_nmbr+1)/list_main.length),
                 ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    "${ques_nmbr + 1}/5",
+                    "${ques_nmbr + 1}/${list_main.length}",
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.grey,
@@ -156,7 +155,7 @@ class _Quiz_PageState extends State<Quiz_Page> {
                       child: Container(
                         margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
                         child: Text(
-                          "Format: +4 for  _correct answer,-1 for in_correct",
+                          "Format: +4 for correct answer,-1 for incorrect",
                           softWrap: true,
                           maxLines: 3,
                           style: TextStyle(
