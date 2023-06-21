@@ -46,6 +46,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int list_count = ques_dtl_lst.length;
   int quiz_ques_nmbr=0;
+  int esy_ques=0;
+  int mdm_ques=0;
+  int hrd_ques=0;
   void getvalue() async {
     final pref = await SharedPreferences.getInstance();
     if(pref.getInt('nmbr_ques')==null){
@@ -82,7 +85,8 @@ class _HomePageState extends State<HomePage> {
                     margin: EdgeInsets.symmetric(vertical: 20),
                     child: FloatingActionButton(
                       onPressed: () {
-                        if (ques_dtl_lst.length >= quiz_ques_nmbr) {
+                        if (ques_dtl_lst.length >=quiz_ques_nmbr) {
+                          count_lvl_ques();
                           showDialog(
                             context: context,
                             builder: (context) {
@@ -109,12 +113,17 @@ class _HomePageState extends State<HomePage> {
                                 actions: [
                                   ElevatedButton(
                                     onPressed: () {
-                                      select_question(1);
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  Instrct_pg(quiz_list)));
+                                      if(esy_ques>=quiz_ques_nmbr){
+                                        select_question(1);
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Instrct_pg(quiz_list)));
+                                      }
+                                      else{
+                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Add ${quiz_ques_nmbr-esy_ques} easy level questions to continue.")));
+                                      }
                                     },
                                     child: Text("EASY",
                                         style: TextStyle(
@@ -122,22 +131,32 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   ElevatedButton(
                                       onPressed: () {
-                                        select_question(2);
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Instrct_pg(quiz_list)));
+                                        if(mdm_ques>=quiz_ques_nmbr){
+                                          select_question(2);
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Instrct_pg(quiz_list)));
+                                        }
+                                        else{
+                                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Add ${quiz_ques_nmbr-mdm_ques} medium level questions to continue.")));
+                                        }
                                       },
                                       child: Text("MEDIUM")),
                                   ElevatedButton(
                                       onPressed: () {
-                                        select_question(3);
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Instrct_pg(quiz_list)));
+                                        if(hrd_ques>=quiz_ques_nmbr){
+                                          select_question(3);
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Instrct_pg(quiz_list)));
+                                        }
+                                        else{
+                                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Add ${quiz_ques_nmbr-hrd_ques} hard level questions to continue.")));
+                                        }
                                       },
                                       child: Text("HARD")),
                                 ],
@@ -376,6 +395,20 @@ class _HomePageState extends State<HomePage> {
       int temp = random.nextInt(temp_quiz.length);
       quiz_list.add(temp_quiz.elementAt(temp));
       temp_quiz.removeAt(temp);
+    }
+  }
+
+  void count_lvl_ques() {
+    for(int i=0;i<ques_dtl_lst.length;i++){
+      if(ques_dtl_lst.elementAt(i).level=="Easy"){
+        esy_ques++;
+      }
+      else if(ques_dtl_lst.elementAt(i).level=="Medium"){
+        mdm_ques++;
+      }
+      else if(ques_dtl_lst.elementAt(i).level=="Hard"){
+        hrd_ques++;
+      }
     }
   }
 }
