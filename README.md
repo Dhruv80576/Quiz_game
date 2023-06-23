@@ -1,16 +1,9 @@
-# spider_task
+ABHYAS      
 
-A new Flutter project.
+It is self quiz app developed with the help of flutter framework.User can hardcode questions and assign a particular level to a question and after adding particular amount of questions user can start quiz. Quiz includes timer,ontime score updation,user can also change number of questions in the quiz,it also saves the result of previous quiz even after closing the application.Its UI is designed to make it operatable easily.App also remembers your settings even after closing the application so, that you don't need to change it again.Abhyas provides a simple way to organise quiz and keep track on your score.
 
-## Getting Started
+HOW TO DOWNLOAD?
 
-This project is a starting point for a Flutter application.
+This repositry contains application's apk which you can download and install on you device to take experience of this application.
+This repo also contains sample photos of application's ui to make it easier to understand how app works.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
